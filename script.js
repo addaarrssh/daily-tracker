@@ -173,7 +173,7 @@ function setClicks() {
       showBadgeAt(card);
       checkAllDone();
       updateTrackerForToday();
-      if (id === "chatgpt" && state.chatgpt) openChat();
+      // if (id === "chatgpt" && state.chatgpt) openChat();
     };
   });
 }
@@ -206,27 +206,27 @@ function showBadgeAt(card) {
 }
 
 /* ========= ChatGPT POPUP ========= */
-const chatPopup = document.getElementById("chatgptPopup");
-const chatYes = document.getElementById("chatgptYes");
-const chatNo = document.getElementById("chatgptNo");
+// const chatPopup = document.getElementById("chatgptPopup");
+// const chatYes = document.getElementById("chatgptYes");
+// const chatNo = document.getElementById("chatgptNo");
 
-if (chatYes) {
-  chatYes.onclick = () => {
-    window.open(
-      "https://chatgpt.com/c/69384295-88e4-8324-bb1b-5c35c83c36ce",
-      "_blank"
-    );
-    if (chatPopup) chatPopup.classList.remove("show");
-  };
-}
-if (chatNo) {
-  chatNo.onclick = () => {
-    if (chatPopup) chatPopup.classList.remove("show");
-  };
-}
-function openChat() {
-  if (chatPopup) chatPopup.classList.add("show");
-}
+// if (chatYes) {
+//   chatYes.onclick = () => {
+//     window.open(
+//       "https://chatgpt.com/c/69384295-88e4-8324-bb1b-5c35c83c36ce",
+//       "_blank"
+//     );
+//     if (chatPopup) chatPopup.classList.remove("show");
+//   };
+// }
+// if (chatNo) {
+//   chatNo.onclick = () => {
+//     if (chatPopup) chatPopup.classList.remove("show");
+//   };
+// }
+// function openChat() {
+//   if (chatPopup) chatPopup.classList.add("show");
+// }
 
 /* ========= ACHIEVEMENT ========= */
 function checkAllDone() {
