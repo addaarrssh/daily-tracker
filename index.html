@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>My Habits</title>
+
+  <!-- fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Luckiest+Guy&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- SPLASH (hidden) -->
+  <div id="splash">
+    <video src="items/Animated_GIF_Generation_Request.mp4" autoplay muted playsinline></video>
+  </div>
+
+  <!-- DARK OVERLAY FOR SCROLL FADING -->
+  <div id="fadeOverlay"></div>
+
+  <!-- Achieve badge placeholder -->
+  <img
+    id="achieveBadge"
+    src="items/newones/award-ribbon-gold-icon-golden-260nw-1452754742-removebg-preview.png"
+    alt="achievement"
+    style="display:none; position:absolute; pointer-events:none;"
+  />
+
+  <!-- PARKED CAR -->
+  <div id="parkedCar">
+    <img src="items/download (1).png" alt="car">
+  </div>
+
+  <!-- UFO (random roaming) -->
+  <div id="ufo" onclick="ufoClick(event)">
+    <img src="items/download.png" alt="ufo">
+  </div>
+
+  <!-- SCROLL UFO (wheel control) -->
+  <div id="scrollUfo">
+    <img src="items/newones/scroll_ufo.png" alt="scroll ufo">
+  </div>
+
+  <!-- UFO CLOUD -->
+  <div id="ufoCloud" class="ufo-cloud">
+    <p>LOOK INSIDE THIS UFO?</p>
+    <button onclick="seeImage()">Yes</button>
+    <button onclick="closeCloud()">No</button>
+  </div>
+
+  <!-- UFO SMALL IMAGE -->
+  <div id="ufoImage" class="ufo-image">
+    <img id="ufoImgSmall" src="" alt="surprise">
+  </div>
+
+  <!-- BUILDINGS - PARALLAX -->
+  <div id="cityBack"></div>
+  <div id="city"></div>
+
+  <!-- ACHIEVEMENT OVERLAY (when all 4 done) -->
+  <div id="achievement" class="achievement">
+    <div class="ach-box">
+      🎉 ALL DONE! 🎉
+    </div>
+  </div>
+
+  <!-- SWIPE TEXT -->
+  <h3 class="swipeText">SWIPE&nbsp;UP</h3>
+
+  <!-- EXERCISES BUTTON + PANEL (currently unused but kept) -->
+  <button id="exerciseBtn" class="exercise-btn">Exercises</button>
+
+  <div id="exercisePanel" class="exercise-panel">
+    <h3>Exercises</h3>
+    <div class="exercise-grid">
+      <img src="items/newones/exercisephotos/2fce00b964b7ed0546c5d89eb0b9897c.gif" alt="Exercise 1">
+      <img src="items/newones/exercisephotos/fitgif-friday-reverse-lunge-with-pulse-slider-thumbnail-override-1504017362.gif" alt="Exercise 2">
+      <img src="items/newones/exercisephotos/kettlebell-goblet-squat-muscles (1).gif" alt="Exercise 3">
+      <img src="items/newones/exercisephotos/Push-Up-Plus.gif" alt="Exercise 4">
+      <img src="items/newones/exercisephotos/tmp_2aVJt1_99a6314e132f7aa5_BicepCurl.gif" alt="Exercise 5">
+    </div>
+  </div>
+
+  <!-- EYES -->
+  <div class="eyes">
+    <div class="eye"><div class="pupil"></div></div>
+    <div class="eye"><div class="pupil"></div></div>
+  </div>
+
+  <!-- TITLES -->
+  <h1 class="mainTitle">TRACKER</h1>
+  <h2 class="subTitle">Daily Tasks</h2>
+
+  <!-- HABITS (normal first-screen tasks) -->
+  <div class="habit-container">
+
+    <div class="habit-card" data-habit="walking">
+      <img src="https://media.giphy.com/media/XGnWMiVXL87Xa/giphy.gif" />
+      <h2>Walking</h2>
+    </div>
+
+    <div class="habit-card" data-habit="coding">
+      <img src="https://media.giphy.com/media/p4NLw3I4U0idi/giphy.gif" />
+      <h2>Learn Coding</h2>
+    </div>
+
+    <div class="habit-card" data-habit="journaling">
+      <img src="https://media.giphy.com/media/Ok5n8zFOOTQxxgse17/giphy.gif" />
+      <h2>Journaling</h2>
+    </div>
+
+    <div class="habit-card" data-habit="japanese">
+      <img src="items/From KlickPin CF かわいいもの _ Studying gif Aesthetic gif Aesthetic anime.gif" />
+      <h2>Learn Japanese</h2>
+    </div>
+
+      <!-- 🔥 NEW: Task 5 - ChatGPT (opens link) -->
+    <div class="habit-card" data-habit="chatgpt">
+      <!-- you can change this gif if you want -->
+      <img src="https://media.giphy.com/media/26tn33aiTi1jkl6H6/giphy.gif" />
+      <h2>ChatGPT</h2>
+    </div>
+
+  </div>
+
+  <!-- DATA PANEL (appears when tasks slide away) -->
+  <div id="dataPanel" class="data-panel">
+    <h3>HABIT DATA</h3>
+    <p class="data-count">0 / 4 habits completed</p>
+    <ul class="data-list"></ul>
+
+    <div class="tracker21">
+      <div class="tracker21-header">21-DAY TRACKER</div>
+      <div id="tracker21Grid" class="tracker21-grid"></div>
+    </div>
+  </div>
+  <!-- ChatGPT redirect popup -->
+  <div id="chatgptPopup" class="chatgpt-popup">
+    <div class="chatgpt-popup-inner">
+      <p>Open today&apos;s ChatGPT log?</p>
+      <div class="chatgpt-popup-buttons">
+        <button id="chatgptYes">Open</button>
+        <button id="chatgptNo">Stay</button>
+      </div>
+    </div>
+  </div>
+
+
+
+  <script src="script.js"></script>
+</body>
+</html>
