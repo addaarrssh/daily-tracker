@@ -261,11 +261,11 @@ body.topData .habit-container{
 }
 
 .ufo-image img{
-  /* 100% bigger than before (180 → 360) */
   width:360px;
-  max-width:90vw;   /* so it doesn’t overflow on small screens */
-  image-rendering:pixelated;
+  max-width:80vw;
+  height:auto;
 }
+
 
 
 /* ========== EYES ========== */
@@ -743,6 +743,23 @@ body.topData .habit-container{
 }
 
 /* Phones */
+@media(max-width:600px){
+  .habit-card{
+    width:120px;
+    height:160px;
+  }
+
+  #ufo, #scrollUfo {
+    width:120px;
+    height:80px;
+  }
+
+  .chatgpt-popup-inner{
+    width:90%;
+    font-size:16px;
+  }
+}
+
 @media (max-width: 600px){
 
   body{
