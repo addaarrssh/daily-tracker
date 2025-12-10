@@ -1,9 +1,11 @@
-/* ========= CONSTANTS ========= */
 const KEY = "dailyHabits2";
 const CUSTOM_KEY = "customHabits";
 const LONGPRESS_TIME = 600;
 const NOTE_KEY = "ufoNotes";
 const NOTE_PASSWORD = "1234";
+const LAST_DAY_KEY = "lastDayUsed";
+
+
 
 /* ========= BASE HABITS ========= */
 const BASE_HABITS = [
@@ -329,6 +331,32 @@ function buildTracker() {
     `;
     g.appendChild(cell);
   });
+}
+/* ========= DAILY RESET (NEW DAY) ========= */
+function checkDayChange() {
+  const today = norm(new Date()); // uses your existing norm()
+
+  const lastStr = localStorage.getItem(LAST_DAY_KEY);
+  if (lastStr) {
+    const last = norm(new Date(lastStr));
+    // if date is different -> new day
+    if (today.getTime() !== last.getTime()) {
+      // reset all habits to NOT done for the new day
+      Object.keys(state).forEach((id) => {
+        state[id] = false;
+      });
+      saveState();
+
+      // optional: start today's tracker row as 0/total
+      updateTrackerForToday();
+    }
+  } else {
+    // first ever run → just store today's date
+    updateTrackerForToday();
+  }
+
+  // always store the current day for next time
+  localStorage.setItem(LAST_DAY_KEY, today.toISOString());
 }
 
 /* ========= DATA PANEL ========= */
@@ -869,7 +897,10 @@ document.addEventListener("mousemove", (e) => {
 });
 
 /* ========= INIT ========= */
-buildHabitCards();
-initTracker();
-refreshDataPanel();
-startUfoRoaming();
+/* ========= INIT ========= */
+initTracker();        // set up 21-day tracker
+checkDayChange();     // NEW: reset if new day + log today
+buildHabitCards();    // build cards with (possibly reset) state
+refreshDataPanel();   // update data + 21-day grid
+startUfoRoaming();    // start UFO animation
+
