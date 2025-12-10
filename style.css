@@ -29,6 +29,11 @@ body{
     center/cover no-repeat fixed;
   background-size:110% auto;
   animation:moveBg 12s ease-in-out infinite alternate;
+  body {
+  transform: scale(0.8);
+  transform-origin: top center;
+}
+
 }
 @keyframes moveBg{
   0%{ background-position: 50% 50%; }
