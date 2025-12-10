@@ -23,13 +23,18 @@ body{
   align-items:center;
   font-family:Arial, sans-serif;
   overflow:hidden;
+
+  /* MAIN BACKGROUND – keep it fixed & centered on desktop */
   background:
     linear-gradient(rgba(0,0,0,0.50),rgba(0,0,0,0.50)),
     url("items/Gemini_Generated_Image_x9goc2x9goc2x9go.png")
-    center/cover no-repeat fixed;
-  background-size:110% auto;
+    center center / cover no-repeat fixed;
+
+  /* no weird extra scaling */
+  background-size:cover;
   animation:moveBg 12s ease-in-out infinite alternate;
 }
+
 @keyframes moveBg{
   0%{ background-position: 50% 50%; }
   100%{ background-position: 54% 50%; }
@@ -806,5 +811,15 @@ body.topData .habit-container{
   .data-panel.show{
     width:92vw;
     transform:translate(-50%, 0) scale(1);
+  }
+}
+/* ===== MOBILE BACKGROUND FIX ===== */
+@media (max-width: 900px){
+  body{
+    /* don’t do parallax-style fixed background on small screens */
+    background-attachment: scroll;
+    background-position: center top;
+    background-size: cover;
+    animation:none;         /* stop the slow panning on small screens */
   }
 }
