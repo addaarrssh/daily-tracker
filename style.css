@@ -29,9 +29,7 @@ body{
     center/cover no-repeat fixed;
   background-size:110% auto;
   animation:moveBg 12s ease-in-out infinite alternate;
-  
 }
-
 
 @keyframes moveBg{
   0%{ background-position: 50% 50%; }
@@ -124,10 +122,10 @@ body{
   justify-content:center;
   transition:transform 0.6s ease, opacity 0.6s ease;
 
-  /* 🔥 NEW: hide on first page */
+  /* hidden on first page */
   opacity:0;
   pointer-events:none;
-  transform:translateY(40px);   /* slight down so it can float up later */
+  transform:translateY(40px);
 }
 
 .habit-card{
@@ -143,7 +141,6 @@ body{
   backdrop-filter:blur(14px);
   box-shadow:0 10px 30px rgba(0,0,0,0.55);
 
-  /* 🔥 needed for glow layer behind */
   position:relative;
   z-index:1;
 }
@@ -162,7 +159,8 @@ body{
 .habit-card:hover{
   transform:translateY(-6px) scale(1.03);
 }
-/* when done, strong neon glow */
+
+/* when done, strong neon glow on the card */
 .habit-card.done{
   border:2px solid #a855ff;
   box-shadow:
@@ -175,40 +173,7 @@ body{
 .habit-card::before{
   content:"";
   position:absolute;
-  inset:-16px;
-  border-radius:inherit;
-  background:
-    radial-gradient(circle at 50% 20%,
-      rgba(244,114,255,0.7),
-      rgba(168,85,255,0.6),
-      rgba(88,28,135,0.0) 70%);
-  opacity:0;
-  transform:scale(0.9);
-  filter:blur(12px);
-  transition:opacity 0.3s ease, transform 0.3s ease;
-  z-index:-1;
-}
-
-.habit-card.done::before{
-  opacity:1;
-  transform:scale(1);
-}
-
-/* when in topTasks mode, keep glow even though cards are "floating" */
-body.topTasks .habit-card{
-  background:transparent;
-  border:none;
-  box-shadow:none;
-}
-body.topTasks .habit-card.done{
-  background:rgba(15,5,35,0.8);
-}
-
-/* neon violet glow behind done tasks */
-.habit-card::before{
-  content:"";
-  position:absolute;
-  inset:-14px;                        /* slightly bigger than card */
+  inset:-14px;
   border-radius:inherit;
   background:
     radial-gradient(circle at 50% 20%,
@@ -219,12 +184,22 @@ body.topTasks .habit-card.done{
   transform:scale(0.9);
   filter:blur(10px);
   transition:opacity 0.3s ease, transform 0.3s ease;
-  z-index:-1;                         /* sits BEHIND the card content */
+  z-index:-1;
 }
 
 .habit-card.done::before{
   opacity:1;
   transform:scale(1);
+}
+
+/* when in topTasks mode, tasks floating in sky */
+body.topTasks .habit-card{
+  background:transparent;
+  border:none;
+  box-shadow:none;
+}
+body.topTasks .habit-card.done{
+  background:rgba(15,5,35,0.8);
 }
 
 /* ========== SPLASH ========== */
@@ -513,7 +488,7 @@ body.topTasks .habit-card.done{
   box-shadow:0 0 30px rgba(168,85,255,0.9), 0 0 80px rgba(0,0,0,0.9);
   opacity:0;
   pointer-events:none;
-  transform:translate(90%, -10px) scale(1.8); /* start off to the RIGHT */
+  transform:translate(90%, -10px) scale(1.4); /* smaller than 1.8 so less bulky */
   transform-origin:center top;
   transition:opacity 0.45s ease, transform 0.45s ease;
   z-index:9999;
@@ -523,7 +498,7 @@ body.topTasks .habit-card.done{
 .data-panel.show{
   opacity:1;
   pointer-events:auto;
-  transform:translate(-50%, 0) scale(1.8); /* glide into center */
+  transform:translate(-50%, 0) scale(1.4);
 }
 
 .data-panel h3{
@@ -640,9 +615,9 @@ body.topTasks .habit-card.done{
   color:#4ade80;
 }
 
-/* ========== TOP-STAGE MODES (THIS IS THE IMPORTANT PART) ========== */
+/* ========== TOP-STAGE MODES ========== */
 
-/* Stage 1: tasks hanging in the middle, no cards */
+/* Stage 1: tasks hanging in the middle */
 body.topTasks .habit-container{
   position:fixed;
   top:50%;
@@ -650,16 +625,8 @@ body.topTasks .habit-container{
   transform:translate(-50%, -50%);
   margin-top:0;
   z-index:9000;
-
-  /* 🔥 show only in this stage */
   opacity:1;
   pointer-events:auto;
-}
-
-body.topTasks .habit-card{
-  background:transparent;
-  border:none;
-  box-shadow:none;
 }
 
 /* Stage 2: tasks glide off to left and disappear */
@@ -671,6 +638,7 @@ body.topData .habit-container{
   opacity:0;
   pointer-events:none;
 }
+
 /* ========== CHATGPT POPUP ========== */
 .chatgpt-popup{
   position:fixed;
@@ -755,13 +723,14 @@ body.topData .habit-container{
     padding:0 16px;
   }
 
+  /* slightly smaller cards so 5 fit better on narrower windows */
   .habit-card{
     width:190px;
     height:260px;
   }
 
   .habit-card img{
-    height:170px;
+    height:180px;
   }
 
   .swipeText{
@@ -773,10 +742,9 @@ body.topData .habit-container{
     width:340px;
   }
 
-  /* data panel a bit smaller on medium screens */
   .data-panel,
   .data-panel.show{
-    transform:translate(-50%, 0) scale(1.4);
+    transform:translate(-50%, 0) scale(1.2);
   }
 }
 
@@ -797,21 +765,27 @@ body.topData .habit-container{
     font-size:32px;
   }
 
+  /* make sure 5 tasks can wrap nicely */
   .habit-container{
     margin-top:190px;
     flex-wrap:wrap;
     justify-content:center;
-    gap:14px;
+    gap:12px;
     padding:0 10px;
   }
 
   .habit-card{
-    width:150px;
-    height:220px;
+    width:140px;
+    height:200px;
   }
 
   .habit-card img{
-    height:150px;
+    height:135px;
+  }
+
+  .habit-card h2{
+    font-size:14px !important;
+    padding:6px;
   }
 
   .swipeText{
@@ -823,10 +797,23 @@ body.topData .habit-container{
     width:260px;
   }
 
-  /* make data panel normal size for phones */
   .data-panel,
   .data-panel.show{
     width:92vw;
     transform:translate(-50%, 0) scale(1);
+    max-height:75vh;
+  }
+
+  .data-panel .data-count{
+    font-size:26px;
+  }
+
+  .data-panel .data-list{
+    font-size:12px;
+  }
+
+  .tracker-day{
+    font-size:8px;
+    padding:4px 2px;
   }
 }

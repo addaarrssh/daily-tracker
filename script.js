@@ -6,7 +6,7 @@ const defaultState = {
   coding:false,
   journaling:false,
   japanese:false,
-  chatgpt:false,   // 🔥 5th habit
+  chatgpt:false,   // 5th habit
 };
 
 let storedState;
@@ -102,7 +102,7 @@ document.querySelectorAll(".habit-card").forEach(card=>{
     checkAllDone();
     updateTrackerForToday();
 
-    // 🔥 extra: if ChatGPT just turned done => ask to redirect
+    // if ChatGPT just turned done => ask to redirect
     if(key === "chatgpt" && state.chatgpt){
       openChatgptPopup();
     }
