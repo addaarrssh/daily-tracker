@@ -2,6 +2,7 @@
 <html>
 <head>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <meta charset="UTF-8">
   <title>My Habits</title>
 
@@ -58,7 +59,7 @@
   <div id="cityBack"></div>
   <div id="city"></div>
 
-  <!-- ACHIEVEMENT OVERLAY (when all 4 done) -->
+  <!-- ACHIEVEMENT OVERLAY (when all 5 done) -->
   <div id="achievement" class="achievement">
     <div class="ach-box">
       🎉 ALL DONE! 🎉
@@ -92,7 +93,7 @@
   <h1 class="mainTitle">TRACKER</h1>
   <h2 class="subTitle">Daily Tasks</h2>
 
-  <!-- HABITS (normal first-screen tasks) -->
+  <!-- HABITS (first "city" screen) -->
   <div class="habit-container">
 
     <div class="habit-card" data-habit="walking">
@@ -123,16 +124,19 @@
 
   </div>
 
-  <!-- DATA PANEL (appears when tasks slide away) -->
+  <!-- DATA PANEL (top stage, with 21-day tracker) -->
   <div id="dataPanel" class="data-panel">
     <h3>HABIT DATA</h3>
-    <p class="data-count">0 / 4 habits completed</p>
+    <p class="data-count">0 / 5 habits completed</p>
     <ul class="data-list"></ul>
 
     <div class="tracker21">
       <div class="tracker21-header">21-DAY TRACKER</div>
       <div id="tracker21Grid" class="tracker21-grid"></div>
     </div>
+
+    <!-- Add Task button only here -->
+    <button id="addTaskBtn" class="add-task-btn">Add Task</button>
   </div>
 
   <!-- ChatGPT redirect popup -->
@@ -145,6 +149,68 @@
       </div>
     </div>
   </div>
+
+  <!-- UFO NOTE POPUP -->
+  <div id="notePopup" class="chatgpt-popup">
+    <div class="chatgpt-popup-inner">
+      <textarea id="noteInput"
+        placeholder="Write a note..."
+        style="width:100%;height:80px;"></textarea>
+      <br><br>
+           <button onclick="saveNote()">Save</button>
+      <button onclick="closeNote()">Cancel</button>
+      <button onclick="viewNotes()">View Notes</button>
+
+    </div>
+  </div>
+
+  <!-- VIEW NOTES POPUP -->
+<!-- VIEW NOTES POPUP -->
+<!-- VIEW NOTES POPUP -->
+<div id="noteListPopup" class="chatgpt-popup">
+  <div class="chatgpt-popup-inner"
+       style="
+         max-width:900px;
+         width:90%;
+         text-align:left;
+         padding:30px 40px;
+         font-size:18px;
+         line-height:1.6;
+         max-height:80vh;
+         overflow-y:auto;
+         font-family: Arial, sans-serif;
+       ">
+
+    <h2 style="
+      margin-bottom:20px;
+      text-align:center;
+      font-size:36px;
+      color:#fff;
+      font-weight:600;
+    ">
+      My Notes
+    </h2>
+
+    <div id="noteList"></div>
+
+    <br>
+    <center>
+      <button onclick="closeNoteList()" style="
+        padding:10px 22px;
+        border-radius:10px;
+        border:2px solid #a855ff;
+        background:#150825;
+        color:white;
+        font-family: Arial, sans-serif;
+        font-size:18px;
+        cursor:pointer;
+      ">Close</button>
+    </center>
+  </div>
+</div>
+
+
+
 
   <script src="script.js"></script>
 </body>

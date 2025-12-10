@@ -30,7 +30,6 @@ body{
   background-size:110% auto;
   animation:moveBg 12s ease-in-out infinite alternate;
 }
-
 @keyframes moveBg{
   0%{ background-position: 50% 50%; }
   100%{ background-position: 54% 50%; }
@@ -49,7 +48,7 @@ body{
     filter 0.15s linear;
   opacity:0;
   pointer-events:none;
-  filter: drop-shadow(0 0 20px rgba(168,85,255,1)); /* neon glow */
+  filter: drop-shadow(0 0 20px rgba(168,85,255,1));
 }
 #scrollUfo img{
   width:200px;
@@ -84,7 +83,6 @@ body{
   background-size:auto 100%;
   background-image: url("items/unnamed-removebg-preview.png");
   animation:cityScrollFront 3s linear infinite;
-  /* silhouettes fully black */
   filter: brightness(0);
 }
 @keyframes cityScrollFront{
@@ -92,7 +90,6 @@ body{
   to{ transform:translateX(-50%); }
 }
 
-/* middle slower layer */
 #cityBack{
   position:fixed;
   bottom:0;
@@ -122,7 +119,7 @@ body{
   justify-content:center;
   transition:transform 0.6s ease, opacity 0.6s ease;
 
-  /* hidden on first page */
+  /* hidden on first page until UFO reaches top */
   opacity:0;
   pointer-events:none;
   transform:translateY(40px);
@@ -140,11 +137,9 @@ body{
   text-align:center;
   backdrop-filter:blur(14px);
   box-shadow:0 10px 30px rgba(0,0,0,0.55);
-
   position:relative;
   z-index:1;
 }
-
 .habit-card img{
   width:100%;
   height:250px;
@@ -160,7 +155,7 @@ body{
   transform:translateY(-6px) scale(1.03);
 }
 
-/* when done, strong neon glow on the card */
+/* done: strong neon glow */
 .habit-card.done{
   border:2px solid #a855ff;
   box-shadow:
@@ -168,8 +163,6 @@ body{
     0 0 55px rgba(168,85,255,0.9),
     0 0 90px rgba(168,85,255,0.75);
 }
-
-/* extra glow halo behind the card */
 .habit-card::before{
   content:"";
   position:absolute;
@@ -186,13 +179,22 @@ body{
   transition:opacity 0.3s ease, transform 0.3s ease;
   z-index:-1;
 }
-
 .habit-card.done::before{
   opacity:1;
   transform:scale(1);
 }
 
-/* when in topTasks mode, tasks floating in sky */
+/* when in topTasks mode, cards float in middle */
+body.topTasks .habit-container{
+  position:fixed;
+  top:50%;
+  left:50%;
+  transform:translate(-50%, -50%);
+  margin-top:0;
+  z-index:9000;
+  opacity:1;
+  pointer-events:auto;
+}
 body.topTasks .habit-card{
   background:transparent;
   border:none;
@@ -200,6 +202,16 @@ body.topTasks .habit-card{
 }
 body.topTasks .habit-card.done{
   background:rgba(15,5,35,0.8);
+}
+
+/* when in data mode, tasks slide away left */
+body.topData .habit-container{
+  position:fixed;
+  top:50%;
+  left:0%;
+  transform:translate(-120%, -50%);
+  opacity:0;
+  pointer-events:none;
 }
 
 /* ========== SPLASH ========== */
@@ -240,16 +252,21 @@ body.topTasks .habit-card.done{
 .ufo-image{
   position:fixed;
   display:none;
-  z-index:11000;
+  /* put image ABOVE the dark popup overlay */
+  z-index:130000;
   border:4px solid #542987;
   background:#100818;
   padding:8px;
   box-shadow:0 0 30px rgba(164,89,255,0.8);
 }
+
 .ufo-image img{
-  width:180px;
+  /* 100% bigger than before (180 → 360) */
+  width:360px;
+  max-width:90vw;   /* so it doesn’t overflow on small screens */
   image-rendering:pixelated;
 }
+
 
 /* ========== EYES ========== */
 .eyes{
@@ -488,7 +505,7 @@ body.topTasks .habit-card.done{
   box-shadow:0 0 30px rgba(168,85,255,0.9), 0 0 80px rgba(0,0,0,0.9);
   opacity:0;
   pointer-events:none;
-  transform:translate(90%, -10px) scale(1.4); /* smaller than 1.8 so less bulky */
+  transform:translate(90%, -10px) scale(1.8);
   transform-origin:center top;
   transition:opacity 0.45s ease, transform 0.45s ease;
   z-index:9999;
@@ -498,7 +515,7 @@ body.topTasks .habit-card.done{
 .data-panel.show{
   opacity:1;
   pointer-events:auto;
-  transform:translate(-50%, 0) scale(1.4);
+  transform:translate(-50%, 0) scale(1.8);
 }
 
 .data-panel h3{
@@ -542,7 +559,6 @@ body.topTasks .habit-card.done{
 .data-panel .data-list li span.label{
   opacity:0.8;
 }
-
 .data-panel .data-list li span.value{
   color:#a855ff;
 }
@@ -553,7 +569,6 @@ body.topTasks .habit-card.done{
   padding-top:10px;
   border-top:1px dashed rgba(255,255,255,0.24);
 }
-
 .tracker21-header{
   font-family:'Press Start 2P', monospace;
   font-size:11px;
@@ -563,14 +578,12 @@ body.topTasks .habit-card.done{
   text-shadow:0 0 8px rgba(168,85,255,0.8);
   opacity:0.9;
 }
-
 .tracker21-grid{
   margin-top:8px;
   display:grid;
   grid-template-columns:repeat(7, 1fr);
   gap:6px;
 }
-
 .tracker-day{
   position:relative;
   padding:6px 4px;
@@ -586,17 +599,13 @@ body.topTasks .habit-card.done{
   font-size:9px;
   text-transform:uppercase;
 }
-
 .tracker-day .day-index{
   color:#f5edff;
   opacity:0.9;
 }
-
 .tracker-day .day-status{
   margin-top:2px;
 }
-
-/* state colors */
 .tracker-day.empty .day-status{
   color:rgba(229,231,235,0.5);
 }
@@ -615,31 +624,7 @@ body.topTasks .habit-card.done{
   color:#4ade80;
 }
 
-/* ========== TOP-STAGE MODES ========== */
-
-/* Stage 1: tasks hanging in the middle */
-body.topTasks .habit-container{
-  position:fixed;
-  top:50%;
-  left:50%;
-  transform:translate(-50%, -50%);
-  margin-top:0;
-  z-index:9000;
-  opacity:1;
-  pointer-events:auto;
-}
-
-/* Stage 2: tasks glide off to left and disappear */
-body.topData .habit-container{
-  position:fixed;
-  top:50%;
-  left:0%;
-  transform:translate(-120%, -50%);
-  opacity:0;
-  pointer-events:none;
-}
-
-/* ========== CHATGPT POPUP ========== */
+/* ========== CHATGPT + NOTE POPUPS ========== */
 .chatgpt-popup{
   position:fixed;
   inset:0;
@@ -649,11 +634,9 @@ body.topData .habit-container{
   justify-content:center;
   z-index:120000;
 }
-
 .chatgpt-popup.show{
   display:flex;
 }
-
 .chatgpt-popup-inner{
   background:radial-gradient(circle at top,
     rgba(88,28,135,0.98),
@@ -669,14 +652,12 @@ body.topData .habit-container{
   color:#f5e9ff;
   font-size:12px;
 }
-
 .chatgpt-popup-buttons{
   margin-top:14px;
   display:flex;
   gap:10px;
   justify-content:center;
 }
-
 .chatgpt-popup-buttons button{
   padding:8px 16px;
   border-radius:999px;
@@ -690,10 +671,24 @@ body.topData .habit-container{
   box-shadow:0 0 12px rgba(168,85,255,0.8);
   transition:transform 0.15s ease, box-shadow 0.15s ease;
 }
-
 .chatgpt-popup-buttons button:hover{
   transform:translateY(-2px);
   box-shadow:0 0 18px rgba(244,114,255,0.95);
+}
+
+/* ========== ADD TASK BUTTON (inside data panel only) ========== */
+.add-task-btn{
+  margin-top:20px;
+  width:100%;
+  padding:12px;
+  border-radius:12px;
+  border:2px solid #a855ff;
+  background:#150825;
+  color:white;
+  font-family:'Luckiest Guy', cursive;
+  font-size:20px;
+  cursor:pointer;
+  box-shadow:0 0 12px rgba(168,85,255,0.8);
 }
 
 /* ========== RESPONSIVE LAYOUT ========== */
@@ -723,14 +718,13 @@ body.topData .habit-container{
     padding:0 16px;
   }
 
-  /* slightly smaller cards so 5 fit better on narrower windows */
   .habit-card{
     width:190px;
     height:260px;
   }
 
   .habit-card img{
-    height:180px;
+    height:170px;
   }
 
   .swipeText{
@@ -744,7 +738,7 @@ body.topData .habit-container{
 
   .data-panel,
   .data-panel.show{
-    transform:translate(-50%, 0) scale(1.2);
+    transform:translate(-50%, 0) scale(1.4);
   }
 }
 
@@ -765,27 +759,21 @@ body.topData .habit-container{
     font-size:32px;
   }
 
-  /* make sure 5 tasks can wrap nicely */
   .habit-container{
     margin-top:190px;
     flex-wrap:wrap;
     justify-content:center;
-    gap:12px;
+    gap:14px;
     padding:0 10px;
   }
 
   .habit-card{
-    width:140px;
-    height:200px;
+    width:150px;
+    height:220px;
   }
 
   .habit-card img{
-    height:135px;
-  }
-
-  .habit-card h2{
-    font-size:14px !important;
-    padding:6px;
+    height:150px;
   }
 
   .swipeText{
@@ -801,19 +789,5 @@ body.topData .habit-container{
   .data-panel.show{
     width:92vw;
     transform:translate(-50%, 0) scale(1);
-    max-height:75vh;
-  }
-
-  .data-panel .data-count{
-    font-size:26px;
-  }
-
-  .data-panel .data-list{
-    font-size:12px;
-  }
-
-  .tracker-day{
-    font-size:8px;
-    padding:4px 2px;
   }
 }
