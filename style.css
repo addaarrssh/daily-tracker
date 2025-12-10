@@ -29,12 +29,10 @@ body{
     center/cover no-repeat fixed;
   background-size:110% auto;
   animation:moveBg 12s ease-in-out infinite alternate;
-  body {
-  transform: scale(0.8);
-  transform-origin: top center;
+  
 }
 
-}
+
 @keyframes moveBg{
   0%{ background-position: 50% 50%; }
   100%{ background-position: 54% 50%; }
@@ -730,3 +728,105 @@ body.topData .habit-container{
   box-shadow:0 0 18px rgba(244,114,255,0.95);
 }
 
+/* ========== RESPONSIVE LAYOUT ========== */
+
+/* Tablets / small laptops */
+@media (max-width: 900px){
+
+  body{
+    align-items:flex-start;
+  }
+
+  .mainTitle{
+    font-size:90px;
+    top:40px;
+  }
+
+  .subTitle{
+    top:150px;
+    font-size:48px;
+  }
+
+  .habit-container{
+    margin-top:220px;
+    gap:18px;
+    flex-wrap:wrap;
+    justify-content:center;
+    padding:0 16px;
+  }
+
+  .habit-card{
+    width:190px;
+    height:260px;
+  }
+
+  .habit-card img{
+    height:170px;
+  }
+
+  .swipeText{
+    bottom:80px;
+    font-size:16px;
+  }
+
+  #parkedCar img{
+    width:340px;
+  }
+
+  /* data panel a bit smaller on medium screens */
+  .data-panel,
+  .data-panel.show{
+    transform:translate(-50%, 0) scale(1.4);
+  }
+}
+
+/* Phones */
+@media (max-width: 600px){
+
+  body{
+    align-items:flex-start;
+  }
+
+  .mainTitle{
+    font-size:64px;
+    top:28px;
+  }
+
+  .subTitle{
+    top:115px;
+    font-size:32px;
+  }
+
+  .habit-container{
+    margin-top:190px;
+    flex-wrap:wrap;
+    justify-content:center;
+    gap:14px;
+    padding:0 10px;
+  }
+
+  .habit-card{
+    width:150px;
+    height:220px;
+  }
+
+  .habit-card img{
+    height:150px;
+  }
+
+  .swipeText{
+    bottom:65px;
+    font-size:14px;
+  }
+
+  #parkedCar img{
+    width:260px;
+  }
+
+  /* make data panel normal size for phones */
+  .data-panel,
+  .data-panel.show{
+    width:92vw;
+    transform:translate(-50%, 0) scale(1);
+  }
+}
