@@ -843,10 +843,7 @@ window.addEventListener("touchend", () => {
 });
 
 // mobile scroll
-window.addEventListener("touchmove", function(e){
-  const touch = e.touches[0];
-  e.deltaY = -touch.clientY; // simulate scroll
-}, {passive:true});
+
 
 
 /* ========= EYES FOLLOW MOUSE ========= */
