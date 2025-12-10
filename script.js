@@ -715,6 +715,7 @@ document.addEventListener("click", function (e) {
 });
 
 /* ========= SCROLL UFO + STAGES ========= */
+/* ========= SCROLL UFO + STAGES ========= */
 let scrollUfoPos = 20;
 const scrollUfo = document.getElementById("scrollUfo");
 const fadeOverlayEl = document.getElementById("fadeOverlay");
@@ -750,10 +751,11 @@ function setStage(s) {
   }
 }
 
-window.addEventListener("wheel", (e) => {
+function handleScroll(deltaY) {
   if (!scrollUfo) return;
 
-  if (e.deltaY < 0) scrollUfoPos += 20;
+  // same logic as before, but using deltaY instead of e.deltaY
+  if (deltaY < 0) scrollUfoPos += 20;
   else scrollUfoPos -= 20;
 
   const min = 20,
@@ -793,18 +795,53 @@ window.addEventListener("wheel", (e) => {
     return;
   }
 
-  if (e.deltaY < 0) {
+  if (deltaY < 0) {
     if (stage === "tasks") {
-      topAcc += -e.deltaY;
+      topAcc += -deltaY;
       if (topAcc > 800) setStage("data");
     }
   } else {
     if (stage === "data") {
-      topAcc += e.deltaY;
+      topAcc += deltaY;
       if (topAcc > 800) setStage("tasks");
     }
   }
+}
+
+/* Desktop: mouse wheel scroll */
+window.addEventListener("wheel", (e) => {
+  handleScroll(e.deltaY);
 });
+
+/* Mobile: finger swipe scroll */
+let lastTouchY = null;
+
+window.addEventListener(
+  "touchstart",
+  (e) => {
+    if (e.touches && e.touches.length > 0) {
+      lastTouchY = e.touches[0].clientY;
+    }
+  },
+  { passive: true }
+);
+
+window.addEventListener(
+  "touchmove",
+  (e) => {
+    if (lastTouchY == null || !(e.touches && e.touches.length > 0)) return;
+    const currentY = e.touches[0].clientY;
+    const deltaY = currentY - lastTouchY; // swipe UP => negative, same as wheel
+    lastTouchY = currentY;
+    handleScroll(deltaY);
+  },
+  { passive: true }
+);
+
+window.addEventListener("touchend", () => {
+  lastTouchY = null;
+});
+
 // mobile scroll
 window.addEventListener("touchmove", function(e){
   const touch = e.touches[0];

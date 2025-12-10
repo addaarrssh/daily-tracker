@@ -765,54 +765,75 @@ body.topData .habit-container{
   }
 }
 
+/* Phones */
 @media (max-width: 600px){
 
   body{
     align-items:flex-start;
   }
 
+  /* Smaller title + subtitle on home screen */
   .mainTitle{
-    font-size:64px;
-    top:28px;
+    font-size:42px;
+    top:24px;
   }
 
   .subTitle{
-    top:115px;
-    font-size:32px;
+    top:90px;
+    font-size:24px;
   }
 
+  /* Habit cards: smaller so all 5 can fit nicely in 2 rows */
   .habit-container{
-    margin-top:190px;
+    margin-top:160px;
     flex-wrap:wrap;
     justify-content:center;
-    gap:14px;
-    padding:0 10px;
+    gap:10px;
+    padding:0 8px;
   }
 
   .habit-card{
-    width:150px;
-    height:220px;
+    width:120px;
+    height:170px;
   }
 
   .habit-card img{
-    height:150px;
+    height:110px;
   }
 
+  .habit-card h2{
+    font-size:14px !important;
+  }
+
+  /* swipe text smaller & a bit higher */
   .swipeText{
-    bottom:65px;
-    font-size:14px;
+    bottom:60px;
+    font-size:12px;
   }
 
+  /* smaller car at bottom */
   #parkedCar img{
-    width:260px;
+    width:180px;
   }
 
+  /* smaller roaming UFO */
+  #ufo img{
+    width:130px;
+  }
+
+  /* smaller scroll UFO ship */
+  #scrollUfo img{
+    width:150px;
+  }
+
+  /* data panel: full width but no huge scale */
   .data-panel,
   .data-panel.show{
-    width:92vw;
+    width:94vw;
     transform:translate(-50%, 0) scale(1);
   }
 }
+
 /* ===== MOBILE BACKGROUND FIX ===== */
 @media (max-width: 900px){
   body{
