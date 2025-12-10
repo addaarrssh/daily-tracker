@@ -32,6 +32,11 @@ const BASE_HABITS = [
     label: "ChatGPT",
     img: "https://media.giphy.com/media/26tn33aiTi1jkl6H6/giphy.gif",
   },
+  {
+    id: "python",
+    label: "Learn Python",
+    img: "https://media.giphy.com/media/KAq5w47R9rmTuvWOWa/giphy.gif"
+  },
 ];
 
 const DEFAULT_HABIT_IDS = BASE_HABITS.map((h) => h.id);
